@@ -57,6 +57,6 @@ seferler aranıyor...
 Tren 81201 -> 4 EKONOMİ ; 0 BUSİNESS
 ```
 
-```
+```md
 ![Sefer Listesi](./assets/image.png)
 ```
