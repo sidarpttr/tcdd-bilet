@@ -10,17 +10,22 @@ process.argv.slice(2).forEach((arg) => {
     params[key] = value;
 });
 
-// Varsayılan değerlerle destructure
-const {
+let {
     from = "ERYAMAN YHT",
     to = "SÖĞÜTLÜÇEŞME",
     wait = 2000,
-    repeat = repeat === "inf" ? -1 : !repeat ? 5 : repeat,
+    repeat: repeatParam
 } = params;
 
-let keepRunning = true; // Kontrol değişkeni
+const repeat = repeatParam === undefined 
+    ? 5 
+    : repeatParam === "inf" 
+        ? -1 
+        : Number(repeatParam);
 
-// Terminalden input almak için:
+let keepRunning = true;
+
+// Terminalden input almak için
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 
@@ -65,9 +70,9 @@ process.on("SIGINT", async () => {
 
     if (firstStationButton) {
         await firstStationButton.click();
-        console.log(`Kalkış istasyonu seçildi ✅ (${from})`);
+        console.log(`Kalkış istasyonu seçildi (${from})`);
     } else {
-        console.log("Kalkış istasyonu bulunamadı ❌");
+        console.log("Kalkış istasyonu bulunamadı");
     }
 
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -92,7 +97,7 @@ process.on("SIGINT", async () => {
     for (const button of buttons) {
         const text = await button.evaluate((el) => el.innerText.trim());
         if (text === "Yarın") {
-            await button.evaluate((b) => b.click()); // DOM native click
+            await button.evaluate((b) => b.click());
             console.log("Yarın için...");
             break;
         }
@@ -148,7 +153,7 @@ process.on("SIGINT", async () => {
                 }
                 console.log();
             } catch (err) {
-                //console.log("❌ JSON çözümlenemedi:", err.message);
+                //console.log(" JSON çözümlenemedi:", err.message);
             }
         }
     });
