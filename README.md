@@ -58,9 +58,5 @@ Tren 81201 -> 4 EKONOMİ ; 0 BUSİNESS
 ```
 
 ```
-./assets/image.png
-```
-
-```md
-![Sefer Listesi](assets/image.png)
+![Sefer Listesi](./assets/image.png)
 ```
